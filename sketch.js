@@ -20,7 +20,10 @@ function foodLocation() {
 }
 
 function keyPressed() {
-    console.log(keyCode);
+    setDirection(keyCode);
+}
+
+function setDirection(keyCode) {
     switch(keyCode) {
         case LEFT_ARROW:
             s.setDir(-1, 0);
@@ -40,8 +43,12 @@ function keyPressed() {
 function draw() {
     scale(rez);
     background(220);
-    s.update();
+    let currentPos = s.update(width, height, rez);
     s.show();
+
+    if(currentPos[0] == food.x && currentPos[1] == food.y) {
+        foodLocation();
+    }
 
     noStroke();
     fill(255, 0, 0);
